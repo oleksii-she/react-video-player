@@ -10,10 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "jb-videojs-hls-quality-selector": "^2.0.2",
     "mobx": "^6.13.6",
     "mobx-state-tree": "^7.0.1",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "video.js": "8.0.0",
+    "videojs-contrib-quality-levels": "^3.0.0",
+    "videojs-playlist": "5.2.0",
+    "videojs-quality-selector-hls": "^1.1.1",
+    "videojs-vtt-thumbnails": "0.0.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",
