@@ -1,7 +1,8 @@
 import React from "react";
+import { useState } from "react";
 import "./App.css";
 import VideoPlayer from "../components/videoPlayer/VideoPlayer";
-
+import StreamVideo from "../components/streemVideo";
 const videoId = "isayJHvG4EvPVPTMTQtBKbzHTXoB5rTZJ41g2IYttPo";
 
 const src = `https://stream.mux.com/${videoId}.m3u8`;
@@ -54,9 +55,28 @@ const videoList = [
 ];
 
 export const App = () => {
+  const [toggle, setToggle] = useState(false);
   return (
-    <div className="container">
-      <VideoPlayer videoList={videoList} />
+    <div className="app-box">
+      <div className="toggle-wrapper">
+        <button
+          className={toggle ? `block-btn` : `active`}
+          onClick={() => setToggle(true)}
+        >
+          go live stream
+        </button>
+        <button
+          className={!toggle ? `block-btn` : `active`}
+          onClick={() => setToggle(false)}
+        >
+          go live stream
+        </button>
+      </div>
+      <div className="container">
+        <div>
+          {!toggle ? <VideoPlayer videoList={videoList} /> : <StreamVideo />}
+        </div>
+      </div>
     </div>
   );
 };
