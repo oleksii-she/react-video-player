@@ -6,12 +6,15 @@ import "videojs-contrib-quality-levels";
 import "videojs-playlist";
 import "video.js/dist/video-js.css";
 
+import StreamVideo from "../streemVideo";
 const VideoPlayer = ({ videoList = [] }) => {
-  const videoRef = useRef(null);
-  const playerRef = useRef(null);
   const [playList, setPlayList] = useState([]);
+  const [videoStream, setVideoStram] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
+  const [toggle, setToggle] = useState(true);
+  const videoRef = useRef(null);
+  const playerRef = useRef(null);
 
   useEffect(() => {
     setMounted(true);
@@ -60,28 +63,23 @@ const VideoPlayer = ({ videoList = [] }) => {
 
   if (!mounted) return <h2>Player is not defined</h2>;
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <h1>MUX Video - Quality Levels</h1>
+    <div className="video-player-wrapper">
+      <div className="video-player">
         <video ref={videoRef} className="video video-js" />
       </div>
+
       <div>
-        {playList.length > 0 && (
-          <ul>
-            {playList.map((video, index) => (
-              <li key={video.playlistItemId_}>
+        {videoList.length > 0 && (
+          <ul className="play-list">
+            {videoList.map((video, index) => (
+              <li
+                key={video.playlistItemId_}
+                className={currentIndex === index ? `active-track ` : ``}
+              >
                 <button
-                  onClick={() => playerRef.current.playlist.currentItem(index)}
-                  style={{
-                    cursor: "pointer",
-                    fontWeight: currentIndex === index ? "bold" : "normal",
-                    color: currentIndex === index ? "red" : "blue",
+                  onClick={() => {
+                    setToggle(true);
+                    playerRef.current.playlist.currentItem(index);
                   }}
                 >
                   {video.name}
@@ -110,3 +108,8 @@ VideoPlayer.propTypes = {
 };
 
 export default VideoPlayer;
+/* {
+                    cursor: "pointer",
+                    fontWeight: currentIndex === index ? "bold" : "normal",
+                    color: currentIndex === index ? "red" : "blue",
+                  } */
