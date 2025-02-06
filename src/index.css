@@ -21,3 +21,23 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+button {
+  cursor: pointer;
+}
+
+.playlist-container {
+  justify-content: space-between;
+  padding-top: 24px;
+  display: flex;
+}
+form {
+  display: flex;
+  gap: 24px;
+}
+
+form > input {
+  border-radius: 6px;
+  padding: 8px;
+  height: max-content;
+}
