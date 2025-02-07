@@ -93,7 +93,7 @@
 
 .vjs-matrix .vjs-skip-backward-10 .vjs-icon-placeholder:before {
   content: "" !important;
-  background-image: url("./public/control-bar/SkipBackward.png");
+  background-image: url("./assets/control-bar/SkipBackward.png");
   background-size: 13px;
   background-repeat: no-repeat;
   background-position: center;
@@ -101,7 +101,7 @@
 
 .vjs-matrix .vjs-skip-forward-10 .vjs-icon-placeholder:before {
   content: "" !important;
-  background-image: url("./public/control-bar/SkipForward.png");
+  background-image: url("./assets/control-bar/SkipForward.png");
   background-size: 13px;
   background-repeat: no-repeat;
   background-position: center;
@@ -132,7 +132,7 @@
 .video-js .vjs-play-control .vjs-icon-placeholder:before,
 .video-js .vjs-big-play-button .vjs-icon-placeholder:before {
   content: "" !important;
-  background-image: url("./public/control-bar/play-svgrepo-com.svg");
+  background-image: url("./assets/control-bar/play-svgrepo-com.svg");
   background-size: 16px;
   background-repeat: no-repeat;
   background-position: center;
@@ -153,7 +153,7 @@
   width: 100%;
   left: 8px;
   height: 16px;
-  background-image: url("./public/control-bar/tick.svg");
+  background-image: url("./assets/control-bar/tick.svg");
   background-size: 12px;
   background-repeat: no-repeat;
   background-position: left;
@@ -216,7 +216,7 @@
   left: 8px;
   width: 6px;
   height: 14px;
-  background-image: url("./public/control-bar/arrow-left.svg");
+  background-image: url("./assets/control-bar/arrow-left.svg");
   background-repeat: no-repeat;
   background-position: left;
 }
