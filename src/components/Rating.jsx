@@ -41,7 +41,7 @@ export const Rating = observer(() => {
         </button>
         <p>{numberNegative}</p>
       </div>
-      <p>{Math.round(totalPercentage)}% positive</p>
+      {<p>{totalPercentage}% positive</p>}
     </div>
   );
 });
