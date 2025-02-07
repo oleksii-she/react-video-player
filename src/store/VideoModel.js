@@ -1,6 +1,6 @@
 import { t } from "mobx-state-tree";
 
-export const VideoListModel = t.model("VideoList", {
+export const VideoModel = t.model("VideoList", {
   id: t.string,
   sources: t.array(
     t.model({

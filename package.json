@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@videojs/themes": "^1.0.1",
     "jb-videojs-hls-quality-selector": "^2.0.2",
     "mobx": "^6.13.5",
     "mobx-react-lite": "^4.1.0",
@@ -19,7 +20,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recordrtc": "^5.6.2",
-    "video.js": "8.0.0",
     "videojs-contrib-quality-levels": "^3.0.0",
     "videojs-playlist": "5.2.0",
     "videojs-quality-selector-hls": "^1.1.1",
