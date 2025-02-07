@@ -1,13 +1,78 @@
 import { t } from "mobx-state-tree";
-import { VideoListModel } from "./videoListModel";
-
+import { VideoModel } from "./VideoModel";
+import { RatingModel } from "./ratingModel";
+import { ReviewsModel } from "./reviewModel";
+import { nanoid } from "nanoid";
 export const RootStore = t
   .model("RootStore", {
-    list: t.array(VideoListModel),
+    list: t.array(VideoModel),
+    ratings: t.array(RatingModel),
+    reviews: t.array(ReviewsModel),
+    currentPlayVideo: t.maybeNull(t.string),
+    rating: t.maybeNull(t.number),
   })
+  .views((store) => ({
+    get getReviews() {
+      if (!store.currentPlayVideo) return [];
+
+      const reviews = store.reviews.filter(
+        (review) => review.videoId === store.currentPlayVideo
+      );
+
+      if (!reviews) {
+        return [];
+      }
+      return reviews;
+    },
+    get getRatings() {
+      if (!store.currentPlayVideo) return [];
+
+      const rating = store.ratings.filter(
+        (review) => review.videoId === store.currentPlayVideo
+      );
+
+      if (!rating[0]) {
+        return [];
+      }
+
+      return rating[0].ratings;
+    },
+  }))
   .actions((store) => ({
     setVideo(newVideo) {
-      store.list.replace([...store.list, newVideo]); // Оновлює цілий масив
+      store.list.replace([...store.list, newVideo]);
+    },
+
+    setReviews(comment) {
+      if (!comment) return;
+      const newComment = {
+        id: nanoid(),
+        videoId: store.currentPlayVideo,
+        description: comment,
+      };
+
+      store.reviews.replace([...store.reviews, newComment]);
+    },
+    setRating(rating) {
+      if (!store.currentPlayVideo) {
+        console.log("video is not defined");
+        return;
+      }
+      const ratingIndex = store.ratings.findIndex(
+        (el) => el.videoId === store.currentPlayVideo
+      );
+
+      if (ratingIndex === -1) {
+        store.ratings.push({
+          id: nanoid(),
+          videoId: store.currentPlayVideo,
+          ratings: [rating],
+        });
+        store.rating = null;
+      } else {
+        store.ratings[ratingIndex].ratings.push(rating);
+        store.rating = null;
+      }
     },
 
     deleteVideo(id) {
@@ -15,7 +80,37 @@ export const RootStore = t
       const filter = str.filter((el) => el.id !== id);
       store.list = filter;
     },
+
+    setCurrentVideo(id) {
+      store.currentPlayVideo = id;
+    },
   }));
+
+const defaultReviews = [
+  {
+    id: "1",
+    videoId: "1",
+    description: "Дуже сильно чекаю на це кіно",
+  },
+  {
+    id: "2",
+    videoId: "2",
+    description: "Дуже гарний пейзаж",
+  },
+];
+
+const defaultRatings = [
+  {
+    id: "1",
+    videoId: "1",
+    ratings: [1, 1, 0, 1, 1, 0],
+  },
+  {
+    id: "2",
+    videoId: "2",
+    ratings: [1, 1, 0, 1],
+  },
+];
 
 const defaultList = [
   {
@@ -77,6 +172,9 @@ export const useStore = () => {
   if (!rootStore) {
     rootStore = RootStore.create({
       list: [...defaultList],
+      ratings: [...defaultRatings],
+      reviews: [...defaultReviews],
+      currentPlayVideo: null,
     });
   }
 

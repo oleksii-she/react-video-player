@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Inter:regular,500,700,800&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,25 +7,45 @@
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --bg-color: #1e1e1e;
+  --text-color: #f9fafb;
+  --primary-color: #19191c;
+  --secondary-color: #121214;
+  --active-color: #e11d48;
+  --activeSecondary-color: orange;
+  --font: "Inter", serif;
+
+  --transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.app-box {
+  height: 100vh;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: "Inter", serif;
   font-weight: 400;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1e1e1e;
-  height: 100%;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-color);
+}
+
+h1,
+h2 {
+  color: var(--text-color);
 }
 
 button {
+  font-family: "Inter", serif;
+  font-weight: 400;
+
+  background-color: var(--primary-color);
+  color: var(--text-color);
   cursor: pointer;
+}
+
+li {
+  font-family: "Inter", serif;
+  font-weight: 500;
 }
 
 .playlist-container {
@@ -32,12 +54,98 @@ button {
   display: flex;
 }
 form {
+  display: block;
+}
+
+header {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.container {
+  margin: 0 auto;
+  padding-left: 217px;
+  padding-right: 217px;
+  max-width: 1366px;
+  background-color: var(--secondary-color);
+}
+
+.form-comment {
   display: flex;
-  gap: 24px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.form-comment > textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  height: 70px;
+  resize: none;
+  border-bottom: 2px solid var(--primary-color);
+  outline: none;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+.form-comment > button {
+  padding: 8px;
+  border-radius: 16px;
+}
+
+.pt-40 {
+  margin-top: 40px;
+}
+.pb-40 {
+  margin-bottom: 40px;
 }
 
 form > input {
   border-radius: 6px;
   padding: 8px;
   height: max-content;
+}
+
+/* rating */
+.rating-wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+.button-like,
+.button-dislike {
+  width: 32px;
+  height: 32px;
+
+  background-color: transparent;
+  border: none;
+}
+
+.button-like:hover .like-icon {
+  fill: var(--active-color);
+  transition: var(--transition);
+}
+
+.button-dislike:hover .dislike-icon {
+  fill: var(--activeSecondary-color);
+  transition: var(--transition);
+}
+
+.dislike-icon {
+  transform: rotate(180deg);
+}
+
+.like-icon,
+.dislike-icon {
+  fill: var(--text-color);
+}
+
+.button-like.active .like-icon {
+  fill: var(--active-color);
+}
+
+.button-dislike.active .dislike-icon {
+  fill: var(--activeSecondary-color);
 }

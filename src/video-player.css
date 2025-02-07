@@ -1,3 +1,8 @@
+.hide {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
 .video-player-wrapper {
   padding-top: 22px;
   width: 100%;
@@ -19,15 +24,33 @@
   height: 100% !important;
 }
 
+.video-player > .button-prev,
+.button-next {
+  opacity: 0;
+}
+
+.video-player:hover .button-prev {
+  opacity: 1;
+}
+
+.video-player:hover .button-next {
+  opacity: 1;
+}
+
 .video-player > .button-prev {
   position: absolute;
-  left: 0;
+  left: 2px;
   padding-left: 8px;
   padding-right: 9px;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: transparent;
-  border: 1px solid #3e3e45;
+
+  border-top: 1px solid #3e3e45;
+  border-bottom: 1px solid #3e3e45;
+  border-right: 1px solid #3e3e45;
+
+  border-left: 1px solid transparent;
 }
 
 .video-player > .button-next {
@@ -36,26 +59,187 @@
   padding-right: 8px;
   padding-top: 10px;
   padding-bottom: 10px;
-  right: 0;
+  right: 2px;
   background-color: transparent;
-  border: 1px solid #3e3e45;
+  border-top: 1px solid #3e3e45;
+  border-bottom: 1px solid #3e3e45;
+  border-right: 1px solid transparent;
+
+  border-left: 1px solid #3e3e45;
 }
 
 .button-next > .icon-next {
   transform: rotate(180deg);
 }
-/* .btn-prev,
-.btn-next {
-  position: absolute;
-} */
-
-/* .btn-prev {
-  left: 0;
+.vjs-matrix > .video-js .vjs-control-bar {
+  background-color: black;
+}
+.vjs-matrix > .video-js .vjs-play-progress {
+  background-color: grey !important;
 }
 
-.btn-next {
-  right: 0;
-} */
+.vjs-matrix > .video-js .vjs-load-progress div {
+  background-color: grey !important;
+}
+
+.vjs-matrix > .video-js .vjs-slider {
+  background-color: grey !important;
+}
+
+.vjs-matrix > .video-js .vjs-current-time,
+.vjs-duration.vjs-time-divider {
+  display: block;
+}
+
+.vjs-matrix .vjs-skip-backward-10 .vjs-icon-placeholder:before {
+  content: "" !important;
+  background-image: url("./public/control-bar/SkipBackward.png");
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.vjs-matrix .vjs-skip-forward-10 .vjs-icon-placeholder:before {
+  content: "" !important;
+  background-image: url("./public/control-bar/SkipForward.png");
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.vjs-matrix > .video-js .vjs-big-play-button {
+  border: none;
+  background-color: #e11d48 !important;
+  width: 40px;
+  height: 41px;
+  border-radius: 60%;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 1) !important;
+  outline: none;
+}
+
+.vjs-matrix:hover > .video-js .vjs-big-play-button {
+  background-color: #b0193f !important;
+  outline: none;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 2) !important;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.vjs-matrix > .vjs-paused .vjs-big-play-button {
+  display: flex;
+}
+
+.vjs-matrix > .vjs-icon-play:before,
+.video-js .vjs-play-control .vjs-icon-placeholder:before,
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+  content: "" !important;
+  background-image: url("./public/control-bar/play-svgrepo-com.svg");
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.vjs-matrix .hls-quality-button {
+  left: -12em !important;
+}
+
+.vjs-matrix .hls-quality-button .vjs-selected {
+  background-color: transparent !important;
+  color: #fff;
+}
+
+.vjs-matrix .hls-quality-button .vjs-selected::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  left: 8px;
+  height: 16px;
+  background-image: url("./public/control-bar/tick.svg");
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.vjs-matrix .hls-quality-button ul {
+  width: 185px !important;
+  background-color: #19191c !important;
+  padding-bottom: 8px !important;
+  height: max-content !important;
+  max-height: max-content !important;
+  overflow-x: hidden;
+}
+
+.vjs-matrix .vjs-menu-content {
+  background-color: #19191c !important;
+  width: 100px !important;
+  left: -3em;
+}
+
+.vjs-matrix .video-js .vjs-volume-panel {
+  display: flex;
+  width: 10em !important;
+}
+
+.vjs-matrix .vjs-volume-panel {
+  width: auto !important;
+}
+
+.vjs-matrix .vjs-volume-panel .vjs-volume-control {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+.vjs-matrix .vjs-volume-panel .vjs-volume-level {
+  display: block !important;
+}
+
+.vjs-matrix .hls-quality-button .vjs-menu-title {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #242428;
+  color: #19191c !important;
+  font-family: "Inter", serif !important;
+  display: flex;
+  align-items: center;
+}
+
+.vjs-matrix .hls-quality-button .vjs-menu-title:before {
+  content: "Qualidade";
+  display: inline-block;
+  color: #fff;
+  font-family: "Inter", serif !important;
+  font-weight: 500;
+}
+
+.vjs-matrix .hls-quality-button .vjs-menu-title::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  width: 6px;
+  height: 14px;
+  background-image: url("./public/control-bar/arrow-left.svg");
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.vjs-matrix .hls-quality-button ul li {
+  justify-content: start;
+  padding-left: 27.5px;
+  margin-bottom: 8px;
+  text-transform: none;
+  font-weight: 500;
+}
+.vjs-matrix .hls-quality-button ul li:hover {
+  background-color: #19191c !important;
+  color: #fff;
+}
+
+.vjs-matrix .vjs-menu li.vjs-selected,
+.vjs-menu li.vjs-selected:focus,
+.vjs-menu li.vjs-selected:hover,
+.js-focus-visible .vjs-menu li.vjs-selected:hover {
+  background-color: #19191c !important;
+  color: #fff;
+}
 
 .play-list-wrapper {
   background-color: #19191c;
@@ -150,28 +334,22 @@
   text-align: center;
 }
 
-/* .btn-prev,
-.btn-next {
+/* stream player */
+
+.stream-player {
+  position: relative;
+}
+.stream-player .vjs-play-control {
+  display: none !important;
+}
+
+.button-rec {
+  width: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.message-record {
   position: absolute;
+  top: 0;
 }
-
-.btn-prev {
-  left: 0;
-}
-
-.btn-next {
-  right: 0;
-} */
-/* .vjs-icon-play:before,
-.video-js .vjs-play-control .vjs-icon-placeholder:before,
-.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
-  content: "\f101";
-} */
-
-/* .video-js .vjs-big-play-button {
-  width: 40px !important;
-  height: 41px !important;
-  border-radius: 100% !important;
-  background-color: #e11d48 !important;
-}
- */

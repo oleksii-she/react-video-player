@@ -1,7 +1,8 @@
 import "jb-videojs-hls-quality-selector";
 import "videojs-playlist";
 import "video.js/dist/video-js.css";
-import React, { useEffect, useRef, useState } from "react";
+import "@videojs/themes/dist/city/index.css";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import videojs from "video.js";
 import {
@@ -15,32 +16,51 @@ import { useStore } from "../../store/store";
 
 const VideoPlayer = ({ videoList }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [videoId, setVideoId] = useState(null);
   const [playlist, setPlaylist] = useState([]);
+
   const [checkId, setCheckId] = useState("");
   const videoRef = useRef(null);
   const playerRef = useRef(null);
 
-  const { deleteVideo } = useStore();
+  const { deleteVideo, setCurrentVideo } = useStore();
 
   const options = {
     autoplay: false,
-    controls: true,
+    controls: ["play", "volume", "fullscreen"],
     preload: "auto",
+    play: false,
     playbackRates: [0.5, 1, 1.5, 2, 2.5],
     userActions: { hotkeys: true },
+    pictureInPicture: false,
     controlBar: {
+      children: [
+        "SkipBackward",
+        "playToggle",
+        "SkipForward",
+        "currentTimeDisplay",
+        "progressControl",
+        "remainingTimeDisplay",
+        "volumePanel",
+        "playbackRateMenuButton",
+        "fullscreenToggle",
+      ],
+
       skipButtons: {
         forward: 10,
         backward: 10,
       },
     },
-    plugins: { hlsQualitySelector: {} },
+    plugins: {
+      hlsQualitySelector: {
+        vjsIconClass: "vjs-icon-cog",
+      },
+    },
   };
 
   const handlePlayerReady = (player) => {
     playerRef.current = player;
 
-    // You can handle player events here, for example:
     player.on("waiting", () => {
       videojs.log("player is waiting");
     });
@@ -48,7 +68,21 @@ const VideoPlayer = ({ videoList }) => {
     player.on("dispose", () => {
       videojs.log("player will dispose");
     });
+
+    player.on("playlistitem", () => {
+      const currentIndex = player.playlist.currentItem();
+      setCurrentIndex(currentIndex);
+    });
   };
+
+  useEffect(() => {
+    if (playlist) {
+      const playTrack = playlist[currentIndex];
+      if (playTrack) {
+        setCurrentVideo(playTrack.id);
+      }
+    }
+  }, [currentIndex, playlist, setCurrentVideo]);
 
   useEffect(() => {
     if (!playerRef.current) {
@@ -63,19 +97,14 @@ const VideoPlayer = ({ videoList }) => {
       }));
 
       player.playlist(videoList);
+
       setPlaylist(videoList);
       player.playlist.autoadvance(0);
-      player.on("playlistitem", () => {
-        setCurrentIndex(player.playlist.currentItem());
-      });
     } else {
       const player = playerRef.current;
       player.playlist(videoList);
       setPlaylist(videoList);
       player.playlist.autoadvance(0);
-      player.on("playlistitem", () => {
-        setCurrentIndex(player.playlist.currentItem());
-      });
     }
   }, [videoList, videoRef]);
 
@@ -93,7 +122,7 @@ const VideoPlayer = ({ videoList }) => {
   return (
     <div className="video-player-wrapper">
       <div className="video-player">
-        <div ref={videoRef} className="video video-js" />
+        <div ref={videoRef} className="vjs-matrix video-js " />
         {currentIndex > 0 && (
           <button
             className="button-prev"
