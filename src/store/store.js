@@ -27,15 +27,11 @@ export const RootStore = t
     get getRatings() {
       if (!store.currentPlayVideo) return [];
 
-      const rating = store.ratings.filter(
+      const rating = store.ratings.find(
         (review) => review.videoId === store.currentPlayVideo
       );
 
-      if (!rating[0]) {
-        return [];
-      }
-
-      return rating[0].ratings;
+      return rating || [];
     },
   }))
   .actions((store) => ({
@@ -66,12 +62,13 @@ export const RootStore = t
         store.ratings.push({
           id: nanoid(),
           videoId: store.currentPlayVideo,
+          userChecked: rating,
           ratings: [rating],
         });
         store.rating = null;
       } else {
+        store.ratings[ratingIndex].userChecked = rating;
         store.ratings[ratingIndex].ratings.push(rating);
-        store.rating = null;
       }
     },
 
@@ -103,11 +100,13 @@ const defaultRatings = [
   {
     id: "1",
     videoId: "1",
+    userChecked: 0,
     ratings: [1, 1, 0, 1, 1, 0],
   },
   {
     id: "2",
     videoId: "2",
+    userChecked: 1,
     ratings: [1, 1, 0, 1],
   },
 ];

@@ -5,7 +5,7 @@ export const Reviews = observer(() => {
   const store = useStore();
   const { getReviews } = store;
   return (
-    <div>
+    <div className="rewiews">
       <h2>Rewiews</h2>
       <ul>
         {getReviews.length !== 0 ? (
