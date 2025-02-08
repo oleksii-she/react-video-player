@@ -29,7 +29,7 @@ export const AddVideo = observer(() => {
     store.setVideo(newVideo);
   };
   return (
-    <form onSubmit={submit}>
+    <form onSubmit={submit} className="form-video">
       <input
         type="text"
         placeholder="url"

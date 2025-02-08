@@ -1,9 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Inter:regular,500,700,800&display=swap");
 
+html,
+body,
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  font-display: swap;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 :root {
@@ -17,9 +26,18 @@
 
   --transition: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+#root {
+  background-color: var(--secondary-color);
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
-.app-box {
-  height: 100vh;
+.main {
+  flex: 1;
+  height: 100%;
 }
 
 body {
@@ -64,10 +82,17 @@ header {
 
 .container {
   margin: 0 auto;
-  padding-left: 217px;
-  padding-right: 217px;
-  max-width: 1366px;
-  background-color: var(--secondary-color);
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.form-video {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
 }
 
 .form-comment {
@@ -148,4 +173,20 @@ form > input {
 
 .button-dislike.active .dislike-icon {
   fill: var(--activeSecondary-color);
+}
+
+.rewiews > h2 {
+  margin-bottom: 40px;
+}
+
+.rewiews > ul {
+  list-style: none;
+}
+
+.rewiews > ul > li {
+  margin-bottom: 22px;
+}
+
+.rewiews > ul > li:last-child {
+  margin-bottom: 0;
 }

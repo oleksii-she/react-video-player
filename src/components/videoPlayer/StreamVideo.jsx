@@ -111,15 +111,13 @@ const StreamVideo = () => {
         button.addEventListener("click", () => {
           setRecording((prevRecording) => {
             if (prevRecording) {
-              console.log(prevRecording, "recording true");
               stopRecording();
               button.innerText = "🎥 Rec";
             } else {
               startRecording();
-              console.log(prevRecording, "recording false");
               button.innerText = "🛑 Stop";
             }
-            return !prevRecording; // Оновлюємо стан
+            return !prevRecording;
           });
         });
 
@@ -139,12 +137,6 @@ const StreamVideo = () => {
     };
   }, [mounted]);
 
-  const buttonRec = window.document.querySelector("button-rec");
-
-  useEffect(() => {
-    console.log(buttonRec, "buttonRec");
-  }, [buttonRec]);
-
   if (!mounted) return <h2>Player is not defined</h2>;
 
   return (
@@ -153,7 +145,7 @@ const StreamVideo = () => {
         {error ? (
           <p style={{ color: "red" }}>{error}</p>
         ) : (
-          <video ref={videoRef} className="video video-js" autoPlay />
+          <video ref={videoRef} className="stream-video video-js" autoPlay />
         )}
         <p className="message-record">{message}</p>
       </div>

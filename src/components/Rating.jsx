@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import { IconLike } from "./icons/Icons";
 import { useState } from "react";
 import { useStore } from "../store/store";
@@ -10,11 +11,20 @@ export const Rating = observer(() => {
 
   const { getRatings, setRating } = store;
 
-  const { numberPositive, numberNegative, totalPercentage } =
-    calculationRating(getRatings);
+  const { numberPositive, numberNegative, totalPercentage } = calculationRating(
+    getRatings.ratings ? getRatings.ratings : []
+  );
+
+  useEffect(() => {
+    if (getRatings.userChecked === 0 || getRatings.userChecked === 1) {
+      setRatingToggle(getRatings.userChecked);
+    } else {
+      setRatingToggle(null);
+    }
+  }, [getRatings.userChecked]);
 
   return (
-    <div className="rating-wrapper">
+    <div className={`rating-wrapper`}>
       <div>
         <button
           className={ratingToggle === 1 ? `button-like active` : "button-like"}

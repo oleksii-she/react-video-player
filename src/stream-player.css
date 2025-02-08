@@ -1,0 +1,25 @@
+/* stream player */
+
+.stream-player {
+  position: relative;
+}
+.stream-player .vjs-play-control {
+  display: none !important;
+}
+
+.stream-video {
+  width: 100%;
+  min-width: 320px;
+  height: 347px;
+}
+
+.button-rec {
+  width: 40px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.message-record {
+  position: absolute;
+  top: 0;
+}
